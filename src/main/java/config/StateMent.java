@@ -1,13 +1,13 @@
 package config;
 
+import object.Person;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import static work.SQuery.getPersonForAddress;
+import static work.SQuery.getPersonForId;
 
 public class StateMent {
     public static Statement getStateMent() {
@@ -51,5 +51,26 @@ public class StateMent {
             list.add(map);
         }
         return list;
+    }
+
+    public void nameById() throws SQLException {
+        Person person = getPersonForId(2);
+        System.out.println("id: " + person.id + " -> name: " + person.name);
+    }
+
+    public void checkNameByAddress() throws SQLException {
+        HashSet<String> addr = new HashSet<>();
+        for (Map<String, String> row : getRows()) {
+            addr.add(row.get("address"));
+        }
+        for (String l : addr) {
+            System.out.print(l + " -> name: ");
+            List<Person> persons = getPersonForAddress(l);
+            List<String> names = new ArrayList<>();
+            for (Person ll : persons) {
+                names.add(ll.name);
+            }
+            System.out.println(names);
+        }
     }
 }
