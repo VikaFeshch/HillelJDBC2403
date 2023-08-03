@@ -2,7 +2,6 @@ package work;
 
 import config.StateMent;
 import object.Person;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,13 +22,15 @@ public class SQuery extends StateMent {
         resultSet.next();
         return new Person(resultSet);
     }
+
     public static Person getPersonForId(int i) throws SQLException {
-        ResultSet resultSet = getStateMent().executeQuery("SELECT * FROM sys.hillel2403 WHERE id ='"+ i+ "';");
+        ResultSet resultSet = getStateMent().executeQuery("SELECT * FROM sys.hillel2403 WHERE id ='" + i + "';");
         resultSet.next();
         return new Person(resultSet);
     }
+
     public static List<Person> getPersonForAddress(String address) throws SQLException {
-        ResultSet resultSet = getStateMent().executeQuery("SELECT * FROM sys.hillel2403 WHERE address ='"+ address+ "';");
+        ResultSet resultSet = getStateMent().executeQuery("SELECT * FROM sys.hillel2403 WHERE address ='" + address + "';");
         List<Person> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(new Person(resultSet));

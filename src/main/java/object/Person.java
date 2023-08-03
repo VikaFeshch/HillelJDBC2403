@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Person {
-    public   int id;
-    public String name,address,description,date;
+    public int id;
+    public String name, address, description, date;
 
     public Person(ResultSet resultSet) throws SQLException {
         this.id = Integer.parseInt(resultSet.getString("id"));
